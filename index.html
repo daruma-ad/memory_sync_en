@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Recall App</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- App Header -->
+    <header class="app-header">
+        <h1 class="app-title"><i class="fa-solid fa-brain"></i> Memory<span class="highlight">Sync</span></h1>
+        <div class="header-actions">
+            <button class="icon-btn" id="btn-show-tags" aria-label="Tags">
+                <i class="fa-solid fa-tags"></i>
+            </button>
+            <button class="icon-btn primary" id="btn-add-person" aria-label="Add Person">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="app-main">
+        
+        <!-- Screen 1: Top List (Home) -->
+        <section id="screen-home" class="screen active">
+            <div class="search-bar">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="search-input" placeholder="名前やタグで検索...">
+            </div>
+            
+            <div class="filter-status" id="filter-status" style="display: none;">
+                <span class="filter-label">タグで絞り込み中:</span>
+                <span class="tag-badge active filter-badge" id="current-filter-tag">#タグ名 <i class="fa-solid fa-xmark"></i></span>
+            </div>
+
+            <div class="people-grid" id="people-list">
+                <!-- Person Cards will be injected here -->
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-icon"><i class="fa-regular fa-face-smile"></i></div>
+                    <h3>まだ誰も登録されていません</h3>
+                    <p>右上の＋ボタンから新しい人を追加しましょう</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 2: Add/Edit Person -->
+        <section id="screen-form" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" id="btn-back-form"><i class="fa-solid fa-arrow-left"></i> 戻る</button>
+                <h2 id="form-title">新しい人を追加</h2>
+            </div>
+            
+            <form id="person-form" class="modern-form">
+                <input type="hidden" id="form-id">
+                
+                <div class="avatar-selector">
+                    <div class="avatar-preview" id="avatar-preview">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <p class="hint">プロフィールアイコン</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-name">名前 <span class="required">*</span></label>
+                    <input type="text" id="input-name" placeholder="山田 太郎" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-tags">特徴・タグ (カンマ区切り)</label>
+                    <input type="text" id="input-tags" placeholder="例: ゴルフ, 犬好き, IT系">
+                    <p class="hint">特徴を単語で入力してカンマ(,)で区切ってください</p>
+                </div>
+                
+                <!-- Tag Preview Container -->
+                <div id="tag-preview-container" class="tag-preview-container"></div>
+
+                <div class="input-group">
+                    <label for="input-memo">エピソード・メモ</label>
+                    <textarea id="input-memo" rows="4" placeholder="どこで知り合ったか、どんな話をしたか..."></textarea>
+                </div>
+
+                <button type="submit" class="full-btn primary-bg">保存する</button>
+            </form>
+        </section>
+
+        <!-- Screen 3: Person Detail -->
+        <section id="screen-detail" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" id="btn-back-detail"><i class="fa-solid fa-arrow-left"></i> 戻る</button>
+                <div class="detail-actions">
+                    <button class="icon-btn" id="btn-edit-person"><i class="fa-solid fa-pen"></i></button>
+                    <button class="icon-btn danger" id="btn-delete-person"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+
+            <div class="detail-content">
+                <div class="detail-header-card glass-panel">
+                    <div class="detail-avatar" id="detail-avatar"></div>
+                    <h2 class="detail-name" id="detail-name">名前</h2>
+                </div>
+
+                <div class="detail-section">
+                    <h3><i class="fa-solid fa-tags section-icon"></i> 特徴タグ</h3>
+                    <div class="tag-cloud" id="detail-tags">
+                        <!-- Tags injected here -->
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3><i class="fa-solid fa-file-lines section-icon"></i> メモ・エピソード</h3>
+                    <div class="memo-content glass-panel" id="detail-memo">
+                        <!-- Memo injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 4: Tag List -->
+        <section id="screen-tags" class="screen">
+            <div class="screen-header">
+                <button class="back-btn" id="btn-back-tags"><i class="fa-solid fa-arrow-left"></i> 戻る</button>
+                <h2>タグ一覧</h2>
+            </div>
+            
+            <div class="tag-cloud full-page" id="all-tags-list">
+                <!-- All unique tags injected here -->
+                <div class="empty-state" id="tags-empty-state" style="display: none;">
+                    <p>タグがまだありません</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
