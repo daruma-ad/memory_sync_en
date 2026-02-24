@@ -1,7 +1,7 @@
 {
   "name": "anoano",
   "short_name": "anoano",
-  "description": "名前と特徴を忘れないためのアプリ",
+  "description": "App to remember names and traits",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",

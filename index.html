@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>anoano - 名前覚えアプリ</title>
+    <title>anoano - Name Recall</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon.png">
     <meta name="theme-color" content="#f8f9fa">
@@ -41,12 +41,12 @@
         <section id="screen-home" class="screen active">
             <div class="search-bar">
                 <i class="fa-solid fa-search"></i>
-                <input type="text" id="search-input" placeholder="名前やタグで検索...">
+                <input type="text" id="search-input" placeholder="Search name or tag...">
             </div>
 
             <div class="filter-status" id="filter-status" style="display: none;">
-                <span class="filter-label">タグで絞り込み中:</span>
-                <span class="tag-badge active filter-badge" id="current-filter-tag">#タグ名 <i
+                <span class="filter-label">Filtering by tag:</span>
+                <span class="tag-badge active filter-badge" id="current-filter-tag">#tag <i
                         class="fa-solid fa-xmark"></i></span>
             </div>
 
@@ -54,8 +54,8 @@
                 <!-- Person Cards will be injected here -->
                 <div class="empty-state" id="empty-state">
                     <div class="empty-icon"><i class="fa-regular fa-face-smile"></i></div>
-                    <h3>まだ誰も登録されていません</h3>
-                    <p>右上の＋ボタンから新しい人を追加しましょう</p>
+                    <h3>No one registered yet</h3>
+                    <p>Tap the + button to add someone</p>
                 </div>
             </div>
         </section>
@@ -63,8 +63,8 @@
         <!-- Screen 2: Add/Edit Person -->
         <section id="screen-form" class="screen">
             <div class="screen-header">
-                <button class="back-btn" id="btn-back-form"><i class="fa-solid fa-arrow-left"></i> 戻る</button>
-                <h2 id="form-title">新しい人を追加</h2>
+                <button class="back-btn" id="btn-back-form"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                <h2 id="form-title">Add New Person</h2>
             </div>
 
             <form id="person-form" class="modern-form">
@@ -74,36 +74,36 @@
                     <div class="avatar-preview" id="avatar-preview">
                         <i class="fa-solid fa-user"></i>
                     </div>
-                    <p class="hint">プロフィールアイコン</p>
+                    <p class="hint">Profile Icon</p>
                 </div>
 
                 <div class="input-group">
-                    <label for="input-name">名前 <span class="required">*</span></label>
-                    <input type="text" id="input-name" placeholder="山田 太郎" required>
+                    <label for="input-name">Name <span class="required">*</span></label>
+                    <input type="text" id="input-name" placeholder="John Doe" required>
                 </div>
 
                 <div class="input-group">
-                    <label for="input-tags">特徴・タグ (カンマ区切り)</label>
-                    <input type="text" id="input-tags" placeholder="例: ゴルフ, 犬好き, IT系">
-                    <p class="hint">特徴を単語で入力してカンマ(,)で区切ってください</p>
+                    <label for="input-tags">Traits & Tags (comma separated)</label>
+                    <input type="text" id="input-tags" placeholder="e.g. Golf, Dog lover, Tech">
+                    <p class="hint">Enter traits as words and separate with commas (,)</p>
                 </div>
 
                 <!-- Tag Preview Container -->
                 <div id="tag-preview-container" class="tag-preview-container"></div>
 
                 <div class="input-group">
-                    <label for="input-memo">エピソード・メモ</label>
-                    <textarea id="input-memo" rows="4" placeholder="どこで知り合ったか、どんな話をしたか..."></textarea>
+                    <label for="input-memo">Notes & Encounters</label>
+                    <textarea id="input-memo" rows="4" placeholder="Where you met, what you talked about..."></textarea>
                 </div>
 
-                <button type="submit" class="full-btn primary-bg">保存する</button>
+                <button type="submit" class="full-btn primary-bg">Save Profile</button>
             </form>
         </section>
 
         <!-- Screen 3: Person Detail -->
         <section id="screen-detail" class="screen">
             <div class="screen-header">
-                <button class="back-btn" id="btn-back-detail"><i class="fa-solid fa-arrow-left"></i> 戻る</button>
+                <button class="back-btn" id="btn-back-detail"><i class="fa-solid fa-arrow-left"></i> Back</button>
                 <div class="detail-actions">
                     <button class="icon-btn" id="btn-edit-person"><i class="fa-solid fa-pen"></i></button>
                     <button class="icon-btn danger" id="btn-delete-person"><i class="fa-solid fa-trash"></i></button>
@@ -113,18 +113,18 @@
             <div class="detail-content">
                 <div class="detail-header-card glass-panel">
                     <div class="detail-avatar" id="detail-avatar"></div>
-                    <h2 class="detail-name" id="detail-name">名前</h2>
+                    <h2 class="detail-name" id="detail-name">Name</h2>
                 </div>
 
                 <div class="detail-section">
-                    <h3><i class="fa-solid fa-tags section-icon"></i> 特徴タグ</h3>
+                    <h3><i class="fa-solid fa-tags section-icon"></i> Tags</h3>
                     <div class="tag-cloud" id="detail-tags">
                         <!-- Tags injected here -->
                     </div>
                 </div>
 
                 <div class="detail-section">
-                    <h3><i class="fa-solid fa-file-lines section-icon"></i> メモ・エピソード</h3>
+                    <h3><i class="fa-solid fa-file-lines section-icon"></i> Notes & Encounters</h3>
                     <div class="memo-content glass-panel" id="detail-memo">
                         <!-- Memo injected here -->
                     </div>
@@ -135,14 +135,14 @@
         <!-- Screen 4: Tag List -->
         <section id="screen-tags" class="screen">
             <div class="screen-header">
-                <button class="back-btn" id="btn-back-tags"><i class="fa-solid fa-arrow-left"></i> 戻る</button>
-                <h2>タグ一覧</h2>
+                <button class="back-btn" id="btn-back-tags"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                <h2>All Tags</h2>
             </div>
 
             <div class="tag-cloud full-page" id="all-tags-list">
                 <!-- All unique tags injected here -->
                 <div class="empty-state" id="tags-empty-state" style="display: none;">
-                    <p>タグがまだありません</p>
+                    <p>No tags yet</p>
                 </div>
             </div>
         </section>

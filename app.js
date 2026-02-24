@@ -126,11 +126,11 @@ const UI = {
             emptyState.style.display = 'flex';
             if (AppState.people.length > 0) {
                 // Not totally empty, just search yielded no results
-                emptyState.querySelector('h3').textContent = '見つかりませんでした';
-                emptyState.querySelector('p').textContent = '検索条件を変えてみてください';
+                emptyState.querySelector('h3').textContent = 'No results found';
+                emptyState.querySelector('p').textContent = 'Please try changing your search terms';
             } else {
-                emptyState.querySelector('h3').textContent = 'まだ誰も登録されていません';
-                emptyState.querySelector('p').textContent = '右上の＋ボタンから新しい人を追加しましょう';
+                emptyState.querySelector('h3').textContent = 'No one registered yet';
+                emptyState.querySelector('p').textContent = 'Tap the + button to add someone';
             }
             container.appendChild(emptyState);
             return;
@@ -193,7 +193,7 @@ const UI = {
         ).join('');
 
         const memoEl = document.getElementById('detail-memo');
-        memoEl.textContent = person.memo || 'メモはありません';
+        memoEl.textContent = person.memo || 'No notes available';
         memoEl.style.color = person.memo ? 'var(--text-primary)' : 'var(--text-secondary)';
         memoEl.style.fontStyle = person.memo ? 'normal' : 'italic';
 
@@ -213,13 +213,13 @@ const UI = {
         const inputMemo = document.getElementById('input-memo');
         
         if (personToEdit) {
-            formTitle.textContent = '情報を編集';
+            formTitle.textContent = 'Edit Profile';
             formId.value = personToEdit.id;
             inputName.value = personToEdit.name;
             inputTags.value = personToEdit.tags.join(', ');
             inputMemo.value = personToEdit.memo;
         } else {
-            formTitle.textContent = '新しい人を追加';
+            formTitle.textContent = 'Add New Person';
             formId.value = '';
             inputName.value = '';
             inputTags.value = '';
@@ -266,7 +266,7 @@ const UI = {
 
     // Delete person
     deletePerson(id) {
-        if (confirm('本当にこの人を削除しますか？')) {
+        if (confirm('Are you sure you want to delete this person?')) {
             AppState.people = AppState.people.filter(p => p.id !== id);
             Storage.save();
             this.navigateTo('screen-home');
